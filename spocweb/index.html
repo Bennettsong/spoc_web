@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>思博课</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- fullPage core CSS -->
+    <link rel="stylesheet" type="text/css" href="fullPage/jquery.fullPage.css" />
+    <!-- video-js core CSS -->
+	<link href="video/video-js.min.css" rel="stylesheet">
+    <!-- Custom styles for this websit -->
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+     <!--[if lt IE 8]>
+      <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+     <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="fullPage/jquery.fullPage.min.js"></script>
+    <script src="video/video.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>   
+    
+	  <script>
+	  
+          $(document).ready(function () {
+			$('#fullpage').fullpage({
+			verticalCentered:false,
+			resize:false,
+			scrollingSpeed:800,
+			fitToSection:true,
+			paddingTop:'50px',
+			keyboardScrolling:true,
+
+            onLeave: function (index, nextIndex, direction) {
+                if (nextIndex === 3) {
+					$('.carousel').carousel({
+      					interval: 3000
+    				});
+                }
+            }			
+			});
+			var a=$('#example_video_1').parent().width();
+			var b=$('#unheight').height() *1.5;
+			videojs("example_video_1", { "width": a, "height": b,  "controls": true, "autoplay": false, "preload": "auto" }); 
+		});
+      </script>    
+    
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-fixed-top navbar-default" id="topbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#" id="logo"><img src="image/1_02.gif"></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">团队</a></li>
+            <li><a href="#">作品</a></li>
+            <li><a href="#">联系</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+    <div id="fullpage">
+      <div class="section">
+         <div id="orange_lab">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-5 col-xs-12 col-md-offset-1">                  
+                     <video id="example_video_1" class="video-js vjs-skin-hotdog-stand vjs-big-play-centered " poster="http://video-js.zencoder.com/oceans-clip.png">
+                        <source id ='v1' src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
+                        <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+                        <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg' />
+                        <track kind="captions" src="demo.captions.vtt" srclang="zh" label="china"></track><!-- Tracks need an ending tag thanks to IE9 -->
+                        <track kind="subtitles" src="demo.captions.vtt" srclang="zh" label="china"></track><!-- Tracks need an ending tag thanks to IE9 -->
+                    </video>                  
+                </div><!-- /.col-md-6 -->
+                <div class="col-md-1 col-xs-0"></div>
+                <div class="col-md-5 col-xs-12">
+                  <ul id="unheight" class="cut">
+                    <li>我们能做视频，能拍微电影，能做我们想做的</li>
+                    <li>我们能拍广告，能拍微课，能帮别人打开心灵之窗</li>
+                    <li>我们能做APP，能将你的创意完美实现</li>
+                  </ul>
+                </div><!-- /.col-md-6 -->
+              </div><!-- /.row -->
+            </div><!-- /.container -->        
+        </div><!-- /.orange_lab -->
+        <div id="white_lab">
+            <div class="container">
+
+				<div class="row">
+                	<div class="col-md-5 col-md-offset-1 hidden-xs"> 
+                    	<dt style="margin-left:5px"><img src="image/logo_03.gif"><font>创业型团队</font></dt>
+                        <dl>兴趣自由发展，迭代创新观念</dl>
+                    </div>
+                    <div class="col-md-5 col-md-offset-1 hidden-xs">
+                    	<dt><font style="margin-right:5px">学习型团队</font><img src="image/logo_10.gif"></dt>
+                        <dl>多专业相融合，突破技术瓶颈</dl>
+                    </div>
+            	</div>
+            
+            </div>
+        </div><!-- /.white_lab -->
+      </div><!--/section1 -->
+      
+      <div class="section">
+        <div class="slide"> Slide 1 </div>
+        <div class="slide"> Slide 2 </div>
+        <div class="slide"> Slide 3 </div>
+        <div class="slide"> Slide 4 </div>      
+      </div><!--/section2 -->
+      <div class="section">  
+    
+    
+ <div class="container">
+ 	<div class="row">
+		  <div id="full" class="carousel slide">
+		    <div class="carousel-inner">
+		      <ul class="row item active">
+		        <li class="col-xs-4">
+		          <a href="#"><img src="image/20141009151623_images.jpg" class="img-responsive"></a>
+		        </li>
+		        <li class="col-xs-4">
+		          <img src="image/20141009151623_images.jpg" class="img-responsive">
+		        </li>
+		        <li class="col-xs-4">
+		          <img src="image/20141009151623_images.jpg" class="img-responsive">
+		        </li>
+		      </ul>
+		      <ul class="row item">
+		        <li class="col-xs-4">
+		          <img src="image/20141009151623_images.jpg" class="img-responsive">
+		        </li>
+		        <li class="col-xs-4">
+		          <img src="image/20141009151623_images.jpg" class="img-responsive">
+		        </li>
+		        <li class="col-xs-4">
+		          <img src="image/20141009151623_images.jpg" class="img-responsive">
+		        </li>
+		      </ul>
+		    </div>
+
+		    <a class="carousel-control left" href="#full" data-slide="prev">Previous</a>
+		    <a class="carousel-control right" href="#full" data-slide="next">Next</a>
+		  </div>
+     </div>     
+ </div>  
+    
+    
+    
+       
+      </div><!--/section3 -->
+    </div><!--/fullpage -->
+
+    
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+  
+
+</body></html>
