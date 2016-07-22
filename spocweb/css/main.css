@@ -10,7 +10,6 @@ li {
   padding: 0;
 }
 
-
 #logo img{
 	height:50px;
 }
@@ -23,16 +22,17 @@ li {
 #navbar ul li a{
 	color:#b04a34;
 }
-#orange_lab{
+.orange_lab{
 	background-color:#b04a34;
+}
+.big_lab{
 	padding:5% 0;
 }
-#orange_lab  ul{
-  
+#page1-1  ul{
  font-family: "微软雅黑";
  color:#FFF
 }
-#orange_lab  ul  li{
+#page1-1  ul  li{
 	line-height:65px;
 }
 .cut {
@@ -41,12 +41,23 @@ text-overflow:ellipsis;
 white-space: nowrap;
 }
 
-#white_lab{
+.white_lab{
 	height:100%;
 	padding-top:40px;
 	background-color:#fff;
 }
+#page2-1 h1{
+	padding: 5px 0;
+}
 
+.commonTitle {
+    color:#FFF;
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: -5px;
+    line-height: 0.8;
+	margin-bottom:20px;
+}
 
 .carousel {
   margin: 0 30px;
@@ -103,3 +114,14 @@ white-space: nowrap;
 .carousel .carousel-control.right:after {
   left: -100%;
 }
+
+
+#list{ width:100%; position:absolute; top:0; left:0; transition:.5s top;}
+#list .liList{ width:2000px; position:relative; left:50%; margin-left:-1000px; overflow:hidden;}
+#list .divList{ width:1100px; height:520px; margin:0px auto; position:relative;}
+
+#team{ height: 480px;}
+#team .teamContent3{ position:absolute; bottom:50px; left:50%; margin-left:-472px;}
+#team .teamContent3 ul{}
+#team .teamContent3 li{ width:118px; height:448px; background:url(../image/team.png) no-repeat; float:left; cursor:pointer; transition:1s; }
+#canvasBubble{ position:absolute; left:0; bottom:100px; cursor:pointer;}

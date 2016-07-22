@@ -36,19 +36,18 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>   
     
-	  <script>
-	  
+	  <script>  
           $(document).ready(function () {
 			$('#fullpage').fullpage({
 			verticalCentered:false,
+			controlArrows:false,
 			resize:false,
 			scrollingSpeed:800,
 			fitToSection:true,
 			paddingTop:'50px',
 			keyboardScrolling:true,
-
-            onLeave: function (index, nextIndex, direction) {
-                if (nextIndex === 3) {
+            afterLoad: function(anchorLink, index){
+                if (index ===2) {
 					$('.carousel').carousel({
       					interval: 3000
     				});
@@ -57,8 +56,132 @@
 			});
 			var a=$('#example_video_1').parent().width();
 			var b=$('#unheight').height() *1.5;
-			videojs("example_video_1", { "width": a, "height": b,  "controls": true, "autoplay": false, "preload": "auto" }); 
-		});
+			videojs("example_video_1", { "width": a, "height": b,  "controls": true, "autoplay": false, "preload": "auto" });				
+			teamContent();
+			
+			function teamContent(){
+				//oTeamContent3
+				var oTeamContent3=document.getElementById("teamContent3");
+				var aLi = oTeamContent3.getElementsByTagName('li');
+				var oC = null;
+				var w = 118;
+				var h = 300;
+				var timer1 = null;
+				var timer2 = null;
+				create();
+				bindList();
+				function create(){
+					var oUl = document.createElement('ul');
+					for(var i=0;i<8;i++){
+						var oLi = document.createElement('li');
+						oLi.style.backgroundPosition =  -(i*w) +'px 0';
+						oUl.appendChild(oLi);
+					}
+					oTeamContent3.appendChild(oUl);
+				}
+				function bindList(){
+					
+					oTeamContent3.onmouseleave = function(){
+						removeCanvas();
+						for(var i=0;i<aLi.length;i++){
+							aLi[i].style.opacity = 1;
+						}
+					};
+					
+					for(var i=0;i<aLi.length;i++){
+						aLi[i].index = i;
+						aLi[i].onmouseover = function(){
+							addCanvas();
+							oC.style.left = this.index * w + 'px';
+							for(var i=0;i<aLi.length;i++){
+								aLi[i].style.opacity = 0.5;
+							}
+							this.style.opacity = 1;
+						};
+					}
+				}
+				function addCanvas(){
+					if(!oC){
+						oC = document.createElement('canvas');
+						oC.id = 'canvasBubble';
+						oC.width = w;
+						oC.height = h;
+						oTeamContent3.appendChild(oC);
+						bindCanvas();
+					}
+				}
+				function removeCanvas(){
+					clearInterval(timer1);
+					clearInterval(timer2);
+					oTeamContent3.removeChild(oC);
+					oC = null;
+				}
+				function bindCanvas(){
+					var oGC = oC.getContext('2d');
+			
+					var setArr = [];   //存储要绘制的所有图形的数据
+					
+					timer1 = setInterval(function(){
+						
+						oGC.clearRect(0,0,oC.width,oC.height);
+						
+						for(var i=0;i<setArr.length;i++){
+							
+							setArr[i].num += 5;
+							
+							setArr[i].x = setArr[i].startX - Math.sin(setArr[i].num*Math.PI/180)*setArr[i].step;
+							setArr[i].y = setArr[i].startY - (setArr[i].num*Math.PI/180)*setArr[i].step;
+							
+							if( setArr[i].y < 50 ){
+								setArr.splice(i,1);
+							}
+							
+						}
+						
+						for(var i=0;i<setArr.length;i++){
+							oGC.fillStyle = 'rgba('+setArr[i].c1+','+setArr[i].c2+','+setArr[i].c3+','+setArr[i].c4+')';
+							oGC.beginPath();
+								oGC.moveTo(setArr[i].x,setArr[i].y);
+								oGC.arc(setArr[i].x,setArr[i].y,setArr[i].r,0,360*Math.PI/180);
+							oGC.closePath();
+							oGC.fill();
+						}
+						
+					},1000/60);
+					
+					timer2 = setInterval(function(){
+						
+						var x = Math.random()*oC.width;
+						var y = oC.height - 10;
+						var r = Math.random()*6 + 2;
+						var c1 = Math.round(Math.random()*255);
+						var c2 = Math.round(Math.random()*255);
+						var c3 = Math.round(Math.random()*255);
+						var c4 = 1;
+						var num = 0;
+						var step = Math.random()*20 + 10;
+						var startX = x;
+						var startY = y;
+						
+						setArr.push({
+							x : x,
+							y : y,
+							r : r,
+							c1 : c1,
+							c2 : c2,
+							c3 : c3,
+							c4 : c4,
+							num : num,
+							step : step,
+							startX : x,
+							startY : y
+						});
+						
+					},100);
+				}
+			}	//oTeamContent3				
+			 
+		});//(document).ready(function	
       </script>    
     
   </head>
@@ -89,7 +212,7 @@
     
     <div id="fullpage">
       <div class="section">
-         <div id="orange_lab">
+         <div class="orange_lab big_lab" id="page1-1">
             <div class="container">
               <div class="row">
                 <div class="col-md-5 col-xs-12 col-md-offset-1">                  
@@ -112,9 +235,8 @@
               </div><!-- /.row -->
             </div><!-- /.container -->        
         </div><!-- /.orange_lab -->
-        <div id="white_lab">
+        <div class="white_lab" id="page1-2">
             <div class="container">
-
 				<div class="row">
                 	<div class="col-md-5 col-md-offset-1 hidden-xs"> 
                     	<dt style="margin-left:5px"><img src="image/logo_03.gif"><font>创业型团队</font></dt>
@@ -129,57 +251,77 @@
             </div>
         </div><!-- /.white_lab -->
       </div><!--/section1 -->
+
+      <div class="section">  
+    
+    	<div class="orange_lab" id="page2-1" style="padding:2% 0;">
+           <div class="container">
+           
+              <h1 class="commonTitle text-center">
+              <span>荣誉榜</span>
+              </h1>
+           
+              <div class="row">
+                    <div id="full" class="carousel slide">
+                      <div class="carousel-inner">
+                        <ul class="row item active">
+                          <li class="col-xs-3 col-md-3">
+                            <a href="#"><img src="image/1.jpg" class="img-responsive img-thumbnail"></a>
+                          </li>
+                          <li class="col-xs-3 col-md-3">
+                            <img src="image/2.jpg" class="img-responsive img-thumbnail">
+                          </li>
+                          <li class="col-xs-3 col-md-3">
+                            <img src="image/3.jpg" class="img-responsive img-thumbnail">
+                          </li>
+                          <li class="col-xs-3 col-md-3">
+                            <img src="image/3.jpg" class="img-responsive img-thumbnail">
+                          </li>                   
+                        </ul>
+                        <ul class="row item">
+                          <li class="col-xs-3">
+                            <img src="image/4.jpg" class="img-responsive img-thumbnail">
+                          </li>
+                          <li class="col-xs-3">
+                            <img src="image/5.jpg" class="img-responsive img-thumbnail">
+                          </li>
+                          <li class="col-xs-3">
+                            <img src="image/1.jpg" class="img-responsive img-thumbnail">
+                          </li>
+                          <li class="col-xs-3">
+                            <img src="image/1.jpg" class="img-responsive img-thumbnail">
+                          </li>
+                        </ul>
+                      </div><!--/carousel-inner -->       
+                    </div><!--/carousel slide -->
+               </div><!--/row -->     
+           </div><!--/container -->  
+         </div><!--/orange_lab -->
+    
+         <div style="position:relative; top:5%;overflow:hidden; min-height:320px; height:100%">
+           <div id="list">
+              <div id="team" class="liList">
+                  <div id="teamContent" class="divList">	
+                      <div class="teamContent3" id="teamContent3"></div>
+                  </div>
+              </div>
+           </div>
+         </div>
+         
+      </div><!--/section2 -->
+
       
       <div class="section">
         <div class="slide"> Slide 1 </div>
-        <div class="slide"> Slide 2 </div>
-        <div class="slide"> Slide 3 </div>
-        <div class="slide"> Slide 4 </div>      
-      </div><!--/section2 -->
-      <div class="section">  
-    
-    
- <div class="container">
- 	<div class="row">
-		  <div id="full" class="carousel slide">
-		    <div class="carousel-inner">
-		      <ul class="row item active">
-		        <li class="col-xs-4">
-		          <a href="#"><img src="image/20141009151623_images.jpg" class="img-responsive"></a>
-		        </li>
-		        <li class="col-xs-4">
-		          <img src="image/20141009151623_images.jpg" class="img-responsive">
-		        </li>
-		        <li class="col-xs-4">
-		          <img src="image/20141009151623_images.jpg" class="img-responsive">
-		        </li>
-		      </ul>
-		      <ul class="row item">
-		        <li class="col-xs-4">
-		          <img src="image/20141009151623_images.jpg" class="img-responsive">
-		        </li>
-		        <li class="col-xs-4">
-		          <img src="image/20141009151623_images.jpg" class="img-responsive">
-		        </li>
-		        <li class="col-xs-4">
-		          <img src="image/20141009151623_images.jpg" class="img-responsive">
-		        </li>
-		      </ul>
-		    </div>
-
-		    <a class="carousel-control left" href="#full" data-slide="prev">Previous</a>
-		    <a class="carousel-control right" href="#full" data-slide="next">Next</a>
-		  </div>
-     </div>     
- </div>  
-    
-    
-    
-       
+        <div class="slide"> Slide 2 </div>      
       </div><!--/section3 -->
+
+      <div class="section">
+      </div><!--/section4 -->
+
     </div><!--/fullpage -->
 
-    
+
 
 
     <!-- Bootstrap core JavaScript
